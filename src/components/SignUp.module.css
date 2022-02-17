@@ -28,3 +28,7 @@
 	color: #464646;
 	margin-bottom: 0.5rem;
 }
+
+.invalid {
+	background: rgb(189, 117, 129);
+}
