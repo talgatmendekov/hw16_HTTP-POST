@@ -1,3 +1,5 @@
+export const BASE_URL = 'https://react-http-usersinfo-default-rtdb.firebaseio.com/usersInfo.json'
+
 export const USER_NAME = 'USER_NAME'
 export const USER_EMAIL = 'USER_EMAIL'
 export const USER_PASSWORD = 'USER_PASSWORD'

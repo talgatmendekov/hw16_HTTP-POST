@@ -1,16 +1,16 @@
 import React, {useEffect, useReducer, useState} from 'react'
-import { USER_NAME, USER_PASSWORD, USER_EMAIL, INPUT_BLUR, EMAIL_BLUR, PASSWORD_BLUR} from '../Helpers/constants'
+import { USER_NAME, USER_PASSWORD, USER_EMAIL, INPUT_BLUR, EMAIL_BLUR, PASSWORD_BLUR, BASE_URL} from '../Helpers/constants'
 import { loginReducer, initialState } from '../reducer'
 import { useNavigate } from 'react-router-dom'
 import classes from './SignUp.module.css'
 import Button from '../UI/Button/Button'
 import Card from '../UI/Card/Card'
 
-const SignUp = (  ) => {
+const SignUp = (props) => {
     const navigate = useNavigate()
     const [loginState, dispacthLogin] = useReducer(loginReducer, initialState)
     const [formIsValid, setFormIsValid] = useState(false)
-    console.log(loginState)
+ 
 
     useEffect(()=>{
         setFormIsValid(loginState.userName.isValid && loginState.userEmail.isValid && loginState.userPassword.isValid)
@@ -50,7 +50,23 @@ const SignUp = (  ) => {
             password: loginState.userPassword.value,
             id: Math.random().toString()
         }
-      
+
+        
+
+       async function AddUserInfo() {
+          const response = await fetch(BASE_URL, {
+              method: 'POST',
+              body: JSON.stringify(userInfo),
+              headers: {
+                  'Content-type' : 'application/json'
+              }
+          }) 
+          const data = await response.json();
+        
+        };
+        
+          AddUserInfo()
+          return navigate('/Login')
     }
 
   return (
@@ -73,7 +89,7 @@ const SignUp = (  ) => {
                 <input type="password" onChange={passwordChangeHandler} onBlur={validatePasswordHandler} className={`${loginState.userPassword.isValid === false ? classes.invalid: ''}`} />
                 <p>{loginState.userPassword.error}</p>
             </div>
-            <Button type='submit' disabled ={!formIsValid} onClick={()=>{navigate('/Login')}}>sign-up</Button>
+            <Button type='submit' disabled ={!formIsValid}>sign-up</Button>
         </form>
     </Card>
   )

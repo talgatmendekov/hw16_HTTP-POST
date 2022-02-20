@@ -6,8 +6,6 @@ import Login from './components/Login'
 
 
 function App() {
-	
-
 	return (
 		<BrowserRouter>
 			<div className='App'>
@@ -16,7 +14,7 @@ function App() {
 						path='*'
 						element={<Navigate to='/SignUp' replace />}
 					/>
-					<Route path='/SignUp' element={<SignUp />} />
+					<Route  path='/SignUp' element={<SignUp/> } />
 					<Route path='/Login' element={<Login/>} />
 				</Routes>
 			</div>
